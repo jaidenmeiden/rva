@@ -547,19 +547,12 @@ FodyWeavers.xsd
 
 # Personal configuration
 Assets/AllSkyFree/*
-Assets/AllSkyFree.meta
 Assets/FourEvilDragonsHP/*
-Assets/FourEvilDragonsHP.meta
 Assets/Samples/*
-Assets/Samples.meta
 Assets/SampleScenes/*
-Assets/SampleScenes.meta
 Assets/Standard Assets/*
-Assets/Standard Assets.meta
 Assets/Sword_1/*
-Assets/Sword_1.meta
 Assets/Weapon/*
-Assets/Weapon.meta
 Library/ArtifactDB*
 Library/PackageCache
 
