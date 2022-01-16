@@ -561,6 +561,7 @@ Assets/Sword_1.meta
 Assets/Weapon/*
 Assets/Weapon.meta
 Library/ArtifactDB*
+Library/PackageCache
 
 ### VisualStudio Patch ###
 # Additional files built by Visual Studio
