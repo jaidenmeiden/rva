@@ -548,12 +548,12 @@ FodyWeavers.xsd
 # Personal configuration
 Assets/AllSkyFree/*
 Assets/FourEvilDragonsHP/*
+Assets/HTC.UnityPlugin/*
 Assets/Samples/*
 Assets/SampleScenes/*
 Assets/Standard Assets/*
 Assets/Sword_1/*
 Assets/Weapon/*
-Assets/HTC.UnityPlugin/*
 Library/ArtifactDB*
 Library/PackageCache
 
