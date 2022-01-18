@@ -80,13 +80,11 @@ public class Weapons : MonoBehaviour
 			{
 				magicCooldown = 0;
 
-				Debug.Log("Usando " + rightHand.transform.position + "!");
+				Debug.Log("Using " + rightHand.transform.position + "!");
 
 				// Speed at which the user moves the right hand multiplied by an increment
-				/*Vector3 force = 20.0f * (rightHand.transform.position -
-									   lastPositionRight) / Time.deltaTime;*/
-				
-				Vector3 force = 20.0f * (new Vector3(0.0f, 0.0f, -1.553f));
+				Vector3 force = 20.0f * (rightHand.transform.position -
+									   lastPositionRight) / Time.deltaTime;
 
 				Debug.Log("Usando " + force + "!");
 
@@ -97,6 +95,7 @@ public class Weapons : MonoBehaviour
 				currentMagic.GetComponent<Rigidbody>().constraints =
 					RigidbodyConstraints.None;
 				// We apply the launch force in the form of an impulse to the bullet
+				// https://docs.unity3d.com/ScriptReference/ForceMode.Impulse.html
 				currentMagic.GetComponent<Rigidbody>().
 					AddForce(force, ForceMode.Impulse);
 
