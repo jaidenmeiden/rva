@@ -8,6 +8,8 @@ EditorBuildSettings:
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 6fb964fb9690d604eba09eafb7cab4f8,
       type: 2}
+    com.unity.input.settings: {fileID: 11400000, guid: c898cbe6a92b60b469a8ac69acc0ed60,
+      type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: b5f0d0ae0baa8dc4d8433287e310ddba,
       type: 2}
     xr.sdk.mock-hmd.settings: {fileID: 11400000, guid: b7aa90c27ed66284e80f9fd5af44ff81,
