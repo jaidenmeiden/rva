@@ -40,19 +40,21 @@ public class Weapons : MonoBehaviour
 		weaponCooldown += Time.deltaTime;
 		magicCooldown += Time.deltaTime;		
 
+		// Left trigger (HTC_VIU_UnityAxis9) => Review class UnityEngineVRModule into HTC.UnityPlugin/VRModule/Modules (line 166)
 		// Shield movement for defense. It is validated if I have pressed the key
 		// and if the shield is in the game
-		if (Input.GetKeyDown(KeyCode.LeftArrow) && leftWeapon.activeInHierarchy)
+		if (Input.GetAxis("HTC_VIU_UnityAxis9") > 0.1 && leftWeapon.activeInHierarchy)
 		{
 			shieldActive = true;
 		} else
-        {
+		{
 			shieldActive = false;
 		}
-
+		
+		//Right Grip (HTC_VIU_UnityAxis12) => Review class UnityEngineVRModule into HTC.UnityPlugin/VRModule/Modules (line 194)
 		// Weapon change. It is validated if we press the 'RightArrow' key and more than the
 		// necessary time has passed so that a quick jump is not seen, the weapon is changed.
-		if (Input.GetKeyDown(KeyCode.RightArrow) && weaponCooldown > WEAPON_COOLDOWN_TIME)
+		if (Input.GetAxis("HTC_VIU_UnityAxis12") > 0.1 && weaponCooldown > WEAPON_COOLDOWN_TIME)
 		{
 			weaponCooldown = 0;
 			// Weapons status changed
@@ -69,9 +71,10 @@ public class Weapons : MonoBehaviour
 				Destroy(currentMagic);
 			}
 		}
-
+		
+		//Right trigger => Review class UnityEngineVRModule into HTC.UnityPlugin/VRModule/Modules (line 167)
 		// Cast magic if the spear is selected
-		if (Input.GetKeyDown(KeyCode.UpArrow) && magicCooldown > MAGIC_COOLDOWN_TIME)
+		if (Input.GetAxis("HTC_VIU_UnityAxis10") > 0.1 && magicCooldown > MAGIC_COOLDOWN_TIME)
 		{
 			if (currentMagic != null)
 			{
@@ -95,7 +98,7 @@ public class Weapons : MonoBehaviour
 					RigidbodyConstraints.None;
 				// We apply the launch force in the form of an impulse to the bullet
 				currentMagic.GetComponent<Rigidbody>().
-							AddForce(force, ForceMode.Impulse);
+					AddForce(force, ForceMode.Impulse);
 
 				// Add launch sound
 				currentMagic.GetComponent<AudioSource>().PlayOneShot(fireClip);
@@ -106,9 +109,10 @@ public class Weapons : MonoBehaviour
 
 		}
 
+		//Left Grip (HTC_VIU_UnityAxis11) => Review class UnityEngineVRModule into HTC.UnityPlugin/VRModule/Modules (line 193)
 		// Hide shield. It is validated if we press the 'DownArrow' key and more than the necessary
 		// time has passed so that a quick jump is not seen, the shield is hidden or shown.
-		if (Input.GetKeyDown(KeyCode.DownArrow) && weaponCooldown > WEAPON_COOLDOWN_TIME)
+		if (Input.GetAxis("HTC_VIU_UnityAxis11") > 0.1 && weaponCooldown > WEAPON_COOLDOWN_TIME)
 		{
 			weaponCooldown = 0;
 			// Shield status changed
