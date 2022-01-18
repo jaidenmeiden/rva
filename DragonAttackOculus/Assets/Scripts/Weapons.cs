@@ -5,26 +5,26 @@ using UnityEngine;
 public class Weapons : MonoBehaviour
 {
 
-	// Inicializamos las variables
+	// Initialize variables
 	public GameObject rightHand, leftHand;
-	// Inicializamos las posiciones anteriores de las manos
+	// Initialize the previous of the hands
 	Vector3 lastPositionRight, lastPositionLeft;
 
-	// Creamos los Game objects para manipular los objetos definidos en cada mano
+	// Create the game objects to manipulate the objects defined in each hand
 	public GameObject leftWeapon, rightWeapon, rightWeaponAlternative, magicLaunchPoint;
-	// Creamos los Game objects para lanzar magia
+	// Create the game objects to launch magic
 	public GameObject currentMagic, fireMagic;
 
-	// Definimos los tiempos de cambio de arma, ocultar escudo y lanzar magia
+	// Define the times to change weapons, hide shield and cast magic
 	public float weaponCooldown, magicCooldown = 0.0f;
-	// Tiempos de recarga para evitar el salto continuo para armas y magia
+	// Cooldown to prevent continuous jump for magic and weapons
 	public const float WEAPON_COOLDOWN_TIME = 0.5f;
 	public const float MAGIC_COOLDOWN_TIME = 2.0f;
 
-	// Definimos si esta activo o no el escudo
+	// Define if the shield is active or not
 	public bool shieldActive = false;
 
-	// Click de audio de lanzamiento
+	// Launch audio click
 	public AudioClip fireClip;
 
 	// Use this for initialization
@@ -36,12 +36,12 @@ public class Weapons : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		//Time.deltaTime es el tiempo que ha pasado desde la ultima vez que ucurrio un evento
+		//Time.deltaTime is the time that has passed since the last time an event occurred
 		weaponCooldown += Time.deltaTime;
 		magicCooldown += Time.deltaTime;		
 
-		// Movimiento escudo para defensa. Se valida si tengo presionada la tecla
-		// y si esta tengo escudo en el juego
+		// Shield movement for defense. It is validated if I have pressed the key
+		// and if the shield is in the game
 		if (Input.GetKeyDown(KeyCode.LeftArrow) && leftWeapon.activeInHierarchy)
 		{
 			shieldActive = true;
@@ -50,16 +50,16 @@ public class Weapons : MonoBehaviour
 			shieldActive = false;
 		}
 
-		// Cambio de arma. Se valida si pulso la tecla 'RightArrow' y ha pasado más del
-		// tiempo necesario para que no se vea un salto rapido, se cambia el arma.
+		// Weapon change. It is validated if we press the 'RightArrow' key and more than the
+		// necessary time has passed so that a quick jump is not seen, the weapon is changed.
 		if (Input.GetKeyDown(KeyCode.RightArrow) && weaponCooldown > WEAPON_COOLDOWN_TIME)
 		{
 			weaponCooldown = 0;
-			// Se cambia estado de armas
+			// Weapons status changed
 			rightWeapon.SetActive(!rightWeapon.activeInHierarchy);
 			rightWeaponAlternative.SetActive(!rightWeaponAlternative.activeInHierarchy);
 
-			// Si el activo es la lanza le asignamos la magia, sino se destruye
+			// If the active weapon is the spear we assign the magic, otherwise it is destroyed
 			if (rightWeaponAlternative.activeInHierarchy)
 			{
 				LoadMagic();
@@ -70,7 +70,7 @@ public class Weapons : MonoBehaviour
 			}
 		}
 
-		// Lanza magia si la lanza esta seleccionada
+		// Cast magic if the spear is selected
 		if (Input.GetKeyDown(KeyCode.UpArrow) && magicCooldown > MAGIC_COOLDOWN_TIME)
 		{
 			if (currentMagic != null)
@@ -79,7 +79,7 @@ public class Weapons : MonoBehaviour
 
 				Debug.Log("Usando " + rightHand.transform.position + "!");
 
-				// Velocidad a la que el usuario mueve la mano derecha multiplicado por un incremento
+				// Speed at which the user moves the right hand multiplied by an increment
 				/*Vector3 force = 20.0f * (rightHand.transform.position -
 									   lastPositionRight) / Time.deltaTime;*/
 				
@@ -87,31 +87,31 @@ public class Weapons : MonoBehaviour
 
 				Debug.Log("Usando " + force + "!");
 
-				// Desacoplamos la boal de fuego
+				// Undock the fireball
 				currentMagic.transform.parent = null;
-				// Quitamos las restricciones del bloqueo en el Rigidbody.
-				// Dichas restricciones fueron ingresadas previamente
+				// We remove the lock restrictions on the Rigidbody.
+				// Said restrictions were previously entered
 				currentMagic.GetComponent<Rigidbody>().constraints =
 					RigidbodyConstraints.None;
-				// Aplicamos la fuerza de lanzamiento en forma de impulso  a la bala
+				// We apply the launch force in the form of an impulse to the bullet
 				currentMagic.GetComponent<Rigidbody>().
 							AddForce(force, ForceMode.Impulse);
 
-				// Agregamos el sonido de lanzamiento
+				// Add launch sound
 				currentMagic.GetComponent<AudioSource>().PlayOneShot(fireClip);
 
-				// Invocamos cada recarga de la magia despues de ser lanzada
+				// We invoke each recharge of the magic after it is cast
 				Invoke("LoadMagic", MAGIC_COOLDOWN_TIME);
 			}
 
 		}
 
-		// Ocultar escudo. Se valida si pulso la tecla 'DownArrow' y ha pasado más del
-		// tiempo necesario para que no se vea un salto rapido, se oculta o mustra el escudo.
+		// Hide shield. It is validated if we press the 'DownArrow' key and more than the necessary
+		// time has passed so that a quick jump is not seen, the shield is hidden or shown.
 		if (Input.GetKeyDown(KeyCode.DownArrow) && weaponCooldown > WEAPON_COOLDOWN_TIME)
 		{
 			weaponCooldown = 0;
-			// Se cambia estado de escudo
+			// Shield status changed
 			leftWeapon.SetActive(!leftWeapon.activeInHierarchy);
 		}
 
@@ -122,12 +122,12 @@ public class Weapons : MonoBehaviour
 
 	void LoadMagic()
 	{
-		// Si ya hay una magia asignada la destruimos
+		// If there is already a magic assigned, we destroy it
 		if (currentMagic != null)
 		{
 			Destroy(currentMagic);
 		}
-		// Creamos una nuva instancia de la magia en la transformación del objeto respentivo
+		// We create a new instance of the magic in the transformation of the respective object
 		currentMagic = Instantiate(fireMagic, magicLaunchPoint.transform);
 	}
 }
