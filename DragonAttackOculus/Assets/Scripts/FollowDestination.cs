@@ -8,12 +8,14 @@ public class FollowDestination : MonoBehaviour
     private Transform destination, newDestination;
     public float speed = 5.0f;
     private GameObject player;
+    Animator animator;
     
     // Start is called before the first frame update
     void Start()
     {
         destinations = GameObject.FindGameObjectsWithTag("Waypoint");
         player = GameObject.FindGameObjectWithTag("Player");
+        animator = GetComponent<Animator>();
 
         destination = destinations[Random.Range(0, destinations.Length)].transform;
     }
@@ -52,6 +54,9 @@ public class FollowDestination : MonoBehaviour
             }
         }
         
+        // Assign value from variable distance to change animation to "Fly Flame Attack"
+        
+        animator.SetFloat("distance", targetDirection.magnitude);
         
     }
 }
