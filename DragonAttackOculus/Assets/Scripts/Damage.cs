@@ -16,14 +16,13 @@ public class Damage : MonoBehaviour
     {
         if(other.GetComponent<Health>()!= null){
             if(other.GetComponent<Health>().type != type){
-                //El tipo de daño que hacemos es diferente
-                //de a quien se lo hemos hecho
+                // Damage type that we do is different from who we are damaging
                 float currentDamage = damage;
 
                 if(other.GetComponent<Weapons>()!=null){
-                    //El otro collider lleva armas y escudos
+                    // Another collider carries weapons and shields
                     if(other.GetComponent<Weapons>().shieldActive){
-                        //El otro collider tiene el escudo activado
+                        // Another collider has the shield activated
                         currentDamage /= 5;
                     }
                 }
