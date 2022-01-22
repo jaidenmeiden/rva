@@ -11,12 +11,6 @@ public class Health : MonoBehaviour
     {
         
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     
     public float HealthPoints{
 
@@ -28,11 +22,12 @@ public class Health : MonoBehaviour
             healthPoints = value;
 
             if(healthPoints <= 0){
-                //TODO: gestionar la muerte del personaje / enemigo
+                //TODO: Manage player/enemies death
             }
         }
     }
 
+    // Allow configuration of health points from editor
     [SerializeField]
     private float healthPoints = 100.0f;
 }
