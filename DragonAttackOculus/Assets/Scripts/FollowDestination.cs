@@ -36,7 +36,9 @@ public class FollowDestination : MonoBehaviour
         // Route change
         if (targetDirection.magnitude <= 0.5f)
         {
-            if (Random.Range(0, 1) < 0.7f)
+            float rnd = Random.Range(0, 10);
+            Debug.Log(rnd);
+            if (rnd < 7)
             {
                 do
                 {
