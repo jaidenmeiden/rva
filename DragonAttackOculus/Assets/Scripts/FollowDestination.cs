@@ -5,7 +5,7 @@ using UnityEngine;
 public class FollowDestination : MonoBehaviour
 {
     GameObject[] destinations;
-    private Transform destination;
+    private Transform destination, newDestination;
     public float speed = 5.0f;
     private GameObject player;
     
@@ -32,5 +32,24 @@ public class FollowDestination : MonoBehaviour
         
         Debug.DrawRay(transform.position, newDirection, Color.red);
         transform.rotation = Quaternion.LookRotation(newDirection);
+        
+        // Route change
+        if (targetDirection.magnitude <= 0.5f)
+        {
+            if (Random.Range(0, 1) < 0.7f)
+            {
+                do
+                {
+                    newDestination = destinations[Random.Range(0, destinations.Length)].transform;
+                } while (newDestination == destination);
+                destination = newDestination;
+            }
+            else
+            {
+                destination = player.transform;
+            }
+        }
+        
+        
     }
 }
